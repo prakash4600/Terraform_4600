@@ -8,6 +8,6 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "jenkins_rg" {
-  name     = "jenkins-demo-rg"
+  name     = "jenkinsdemo-rg"
   location = "eastus"
 }
