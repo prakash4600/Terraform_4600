@@ -30,7 +30,7 @@ resource "azurerm_network_interface" "nic" {
   ip_configuration {
     name                          = "jenkins-rahulipconfig"
     subnet_id                     = azurerm_subnet.subnet.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
 	private_ip_address            = "10.0.1.10"
     public_ip_address_id          = azurerm_public_ip.public_ip.id
   }
@@ -40,7 +40,7 @@ resource "azurerm_public_ip" "public_ip" {
   name                = "jenkins-rahulpublic-ip"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
 }
 
 resource "azurerm_network_security_group" "nsg" {
@@ -138,3 +138,4 @@ resource "azurerm_linux_virtual_machine" "jenkins_vm" {
 
   disable_password_authentication = false # ✅ Allow password login
 }
+
