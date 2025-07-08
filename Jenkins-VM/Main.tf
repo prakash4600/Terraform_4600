@@ -78,20 +78,48 @@ resource "azurerm_network_interface_security_group_association" "nsg_assoc" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
+#resource "azurerm_linux_virtual_machine" "jenkins_vm" {
+#  name                = "jenkins-bhanuvm"
+ # resource_group_name = azurerm_resource_group.rg.name
+  #location            = azurerm_resource_group.rg.location
+  #size                = "Standard_B1s"
+  #admin_username      = "azureuser"
+  #network_interface_ids = [
+    #azurerm_network_interface.nic.id,
+  #]
+
+  #admin_ssh_key {
+   # username   = "azureuser"
+    #public_key = file("~/.ssh/id_rsa.pub")
+  #}
+
+  #os_disk {
+    #caching              = "ReadWrite"
+    #storage_account_type = "Standard_LRS"
+   # name                 = "jenkins-os-disk"
+  #}
+
+  #source_image_reference {
+    #publisher = "Canonical"
+    #offer     = "0001-com-ubuntu-server-jammy"
+    #sku       = "22_04-lts"
+   # version   = "latest"
+  #}
+
+  #custom_data = filebase64("cloud-init-jenkins.yaml")
+
+ # disable_password_authentication = true
+#}
 resource "azurerm_linux_virtual_machine" "jenkins_vm" {
   name                = "jenkins-bhanuvm"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   size                = "Standard_B1s"
   admin_username      = "azureuser"
+  admin_password      = "StrongP@ssw0rd123" # 🔐 Replace with a strong password
   network_interface_ids = [
     azurerm_network_interface.nic.id,
   ]
-
-  admin_ssh_key {
-    username   = "azureuser"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
 
   os_disk {
     caching              = "ReadWrite"
@@ -108,5 +136,6 @@ resource "azurerm_linux_virtual_machine" "jenkins_vm" {
 
   custom_data = filebase64("cloud-init-jenkins.yaml")
 
-  disable_password_authentication = true
+  disable_password_authentication = false # ✅ Allow password login
 }
+
