@@ -4,26 +4,26 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "jenkins-rahulrg"
+  name     = "jenkins-raahulrg"
   location = "West US"
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "jenkins-rahulvnet"
+  name                = "jenkins-raahulvnet"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_subnet" "subnet" {
-  name                 = "jenkins-rahulsubnet"
+  name                 = "jenkins-raahulsubnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_network_interface" "nic" {
-  name                = "jenkins-rahulnic"
+  name                = "jenkins-raahulnic"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -37,7 +37,7 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_public_ip" "public_ip" {
-  name                = "jenkins-bhanupublic-ip"
+  name                = "jenkins-raahulpublic-ip"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"     # ✅ Required for Standard SKU
@@ -46,7 +46,7 @@ resource "azurerm_public_ip" "public_ip" {
 
 
 resource "azurerm_network_security_group" "nsg" {
-  name                = "jenkins-rahulnsg"
+  name                = "jenkins-raahulnsg"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -81,7 +81,7 @@ resource "azurerm_network_interface_security_group_association" "nsg_assoc" {
 }
 
 #resource "azurerm_linux_virtual_machine" "jenkins_vm" {
-#  name                = "jenkins-rahulvm"
+#  name                = "jenkins-raahulvm"
  # resource_group_name = azurerm_resource_group.rg.name
   #location            = azurerm_resource_group.rg.location
   #size                = "Standard_B1s"
@@ -113,7 +113,7 @@ resource "azurerm_network_interface_security_group_association" "nsg_assoc" {
  # disable_password_authentication = true
 #}
 resource "azurerm_linux_virtual_machine" "jenkins_vm" {
-  name                = "jenkins-rahulvm"
+  name                = "jenkins-raahulvm"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   size                = "Standard_B1s"
@@ -140,4 +140,3 @@ resource "azurerm_linux_virtual_machine" "jenkins_vm" {
 
   disable_password_authentication = false # ✅ Allow password login
 }
-
